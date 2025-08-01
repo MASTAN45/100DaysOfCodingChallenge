@@ -1,37 +1,34 @@
-class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
-        boolean[] visited = new boolean[strs.length];
-        List<List<String>> result = new ArrayList<>();
-
-        for (int i = 0; i < strs.length; i++) {
-            if (visited[i]) continue;
-
-            List<String> group = new ArrayList<>();
-            group.add(strs[i]);
-            visited[i] = true;
-
-            for (int j = i + 1; j < strs.length; j++) {
-                if (!visited[j] && isAnagram(strs[i], strs[j])) {
-                    group.add(strs[j]);
-                    visited[j] = true;
-                }
+2540. Minimum Common Value
+    class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        int i = 0, j = 0;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                return nums1[i];
+            } else if (nums1[i] < nums2[j]) {
+                i++;
+            } else {
+                j++;
             }
-            result.add(group);
         }
-
-        return result;
+        return -1;
     }
 
-    private boolean isAnagram(String s1, String s2) {
-        if (s1.length() != s2.length()) return false;
+}
 
-        int[] freq = new int[26];
-        for (char c : s1.toCharArray()) freq[c - 'a']++;
-        for (char c : s2.toCharArray()) freq[c - 'a']--;
+389. Find the Difference
 
-        for (int count : freq) {
-            if (count != 0) return false;
+class Solution {
+    public char findTheDifference(String s, String t) {
+        char result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            result ^= s.charAt(i);
         }
-        return true;
+        for (int i = 0; i < t.length(); i++) {
+            result ^= t.charAt(i);
+        }
+        return result;
+        
     }
 }
+
